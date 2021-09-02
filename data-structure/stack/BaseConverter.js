@@ -1,22 +1,22 @@
 const Stack = require('./ArrayStack')
 
-function Base2Base(number, oldBase, newBase) {
+function base2Dec(number, base) {
   let arrLength = String(number).length
   let result = 0
   for (let i = 0; i < arrLength; i++) {
-    result += Number(String(number)[i] * Math.pow(oldBase, arrLength - i - 1))
+    result += Number(String(number)[i] * Math.pow(base, arrLength - i - 1))
   }
-  return dec2Base(result, newBase)
+  return result
 }
 
-function dec2Base(decNum, x) {
+function dec2Base(decNum, base) {
   let s = new Stack()
   let systemStr = ''
   let digits = '0123456789ABCDEF'
 
   while (decNum > 0) {
-    s.push(decNum % x)
-    decNum = Math.floor(decNum / x)
+    s.push(decNum % base)
+    decNum = Math.floor(decNum / base)
   }
 
   while (!s.isEmpty()) {
@@ -26,4 +26,5 @@ function dec2Base(decNum, x) {
   return systemStr
 }
 
-console.log(Base2Base(123, 10, 8));
+console.log(base2Dec(11, 2));
+console.log(dec2Base(11, 2));
